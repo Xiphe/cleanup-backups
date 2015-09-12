@@ -1,0 +1,24 @@
+{
+  "name": "cleanup-backups",
+  "version": "0.0.0",
+  "description": "remove files based on age, keeping some for given time ranges",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "keywords": [
+    "backup",
+    "cleanup"
+  ],
+  "author": "Hannes Diercks <github@xiphe.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine": "^2.3.2",
+    "proxyquire": "^1.7.2"
+  },
+  "dependencies": {
+    "glob": "^5.0.14",
+    "lodash": "^3.10.1",
+    "q": "^1.4.1"
+  }
+}

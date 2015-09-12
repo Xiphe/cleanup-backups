@@ -1,18 +1,8 @@
-JS dotfiles
------------
+cleanup-backups
+---------------
 
-Opinionated dotfiles for new JS projects
+remove files based on age, keeping some for given time ranges
 
-```
-git clone git@github.com:Xiphe/js-dotfiles.git
-cd js-dotfiles
-rm -rf .git
-git init
-git add .
-git commit -m'initiate dotfiles' -m'https://github.com/Xiphe/js-dotfiles'
-cd ..
-mv js-dotfiles my-project-name
-```
 
 LICENSE
 -------
