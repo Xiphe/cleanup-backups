@@ -31,7 +31,7 @@ describe('cleanup-backups', function() {
     cleanupBackups({
       rules: []
     }).then(done.fail, function(err) {
-      expect(err.message).toBe(cleanupBackups.CONST.ERR.MISSING_BASE_FOLDER);
+      expect(err.message).toBe(constants.ERR.MISSING_BASE_FOLDER);
       done();
     });
   });
@@ -40,7 +40,7 @@ describe('cleanup-backups', function() {
     cleanupBackups({
       baseFolder: path.join(__dirname, 'backups')
     }).then(done.fail, function(err) {
-      expect(err.message).toBe(cleanupBackups.CONST.ERR.MISSING_RULES);
+      expect(err.message).toBe(constants.ERR.MISSING_RULES);
       done();
     });
   });
@@ -49,7 +49,7 @@ describe('cleanup-backups', function() {
     cleanupBackups({
       baseFolder: path.join(__dirname, 'backups')
     }, function(err) {
-      expect(err.message).toBe(cleanupBackups.CONST.ERR.MISSING_RULES);
+      expect(err.message).toBe(constants.ERR.MISSING_RULES);
       done();
     });
   });
