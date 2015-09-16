@@ -69,6 +69,19 @@ describe('cleanup-backups', function() {
     }).catch(done.fail);
   });
 
+  it('should not delete when dry is true', function(done) {
+    spyOn(fakeFs, 'unlink').and.callThrough();
+    cleanupBackups({
+      rules: [3],
+      baseFolder: path.join(__dirname, 'backups'),
+      dry: true
+    }).then(function(deleted) {
+      expect(fakeFs.unlink.calls.count()).toBe(0);
+      expect(deleted.length).toBe(2);
+      done();
+    }).catch(done.fail);
+  });
+
   it('should call optional callback with deleted files', function(done) {
     cleanupBackups({
       rules: [2],
