@@ -77,7 +77,7 @@ describe('cleanup-backups', function() {
       expect(err).toBe(null);
       expect(deletedFiles.length).toBe(1);
       expect(deletedFiles[0]).toEqual({
-        file: path.join(__dirname, 'backups/b'),
+        path: path.join(__dirname, 'backups/b'),
         age: 1,
         obsolete: true
       });

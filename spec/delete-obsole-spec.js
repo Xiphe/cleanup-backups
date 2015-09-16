@@ -14,7 +14,7 @@ describe('delete-obsolete', function() {
       cb();
     });
 
-    deleteObsolete([{file: 'foo/a'}, {file: 'bar/b', obsolete: true}])
+    deleteObsolete([{path: 'foo/a'}, {path: 'bar/b', obsolete: true}])
       .then(function() {
         expect(fakeFs.unlink.calls.count()).toEqual(1);
         expect(fakeFs.unlink.calls.argsFor(0)[0]).toBe('bar/b');

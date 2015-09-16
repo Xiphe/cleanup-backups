@@ -20,10 +20,10 @@ describe('get-ages', function() {
     });
     getAges(['a', 'b'], 'foo', getAge).then(function(filesWithAges) {
       expect(filesWithAges).toEqual([{
-        file: 'foo/a',
+        path: 'foo/a',
         age: age
       }, {
-        file: 'foo/b',
+        path: 'foo/b',
         age: age
       }]);
       done();
