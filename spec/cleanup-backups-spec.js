@@ -18,11 +18,14 @@ describe('cleanup-backups', function() {
   var deleteObsolete = proxyquire('../lib/delete-obsolete', {
     fs: fakeFs
   });
-  var getAges = proxyquire('../lib/get-ages', {
+  var getAge = proxyquire('../lib/get-age', {
     fs: fakeFs
   });
+  var constants = proxyquire('../lib/constants', {
+    './get-age': getAge
+  });
   var cleanupBackups = proxyquire('../lib/cleanup-backups', {
-    './get-ages': getAges,
+    './constants': constants,
     './delete-obsolete': deleteObsolete
   });
 
