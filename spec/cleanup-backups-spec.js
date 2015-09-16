@@ -3,14 +3,8 @@ describe('cleanup-backups', function() {
 
   var path = require('path');
   var proxyquire = require('proxyquire');
-  var now = require('../lib/now');
-  var ages = [5000, 10000, 25000];
-  var ageI = 0;
+  var age = 0;
   var fakeFs = {
-    stat: function(file, cb) {
-      cb(null, {mtime: new Date(now - ages[ageI])});
-      ageI += 1;
-    },
     unlink: function(file, cb) {
       cb();
     }
@@ -18,11 +12,11 @@ describe('cleanup-backups', function() {
   var deleteObsolete = proxyquire('../lib/delete-obsolete', {
     fs: fakeFs
   });
-  var getAge = proxyquire('../lib/get-age', {
-    fs: fakeFs
-  });
   var constants = proxyquire('../lib/constants', {
-    './get-age': getAge
+    './get-age': function(file, cb) {
+      cb(null, age);
+      age += 1;
+    }
   });
   var cleanupBackups = proxyquire('../lib/cleanup-backups', {
     './constants': constants,
@@ -30,7 +24,7 @@ describe('cleanup-backups', function() {
   });
 
   beforeEach(function() {
-    ageI = 0;
+    age = 0;
   });
 
   it('should throw if no basefolder is given', function(done) {
@@ -54,7 +48,7 @@ describe('cleanup-backups', function() {
   it('should work', function(done) {
     spyOn(fakeFs, 'unlink').and.callThrough();
     cleanupBackups({
-      rules: [{range: 10000, keep: -1}, {range: 50000, keep: 1}],
+      rules: [{range: 0, keep: -1}, {range: 2, keep: 1}],
       baseFolder: path.join(__dirname, 'backups')
     }).then(function() {
       expect(fakeFs.unlink.calls.count()).toBe(1);
