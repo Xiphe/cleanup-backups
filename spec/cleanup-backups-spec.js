@@ -57,7 +57,7 @@ describe('cleanup-backups', function() {
   it('should work', function(done) {
     spyOn(fakeFs, 'unlink').and.callThrough();
     cleanupBackups({
-      rules: [{range: 0, keep: -1}, {range: 2, keep: 1}],
+      rules: [{age: 0, keep: -1}, {age: 2, keep: 1}],
       baseFolder: path.join(__dirname, 'backups')
     }).then(function() {
       expect(fakeFs.unlink.calls.count()).toBe(1);
@@ -71,7 +71,7 @@ describe('cleanup-backups', function() {
 
   it('should call optional callback with deleted files', function(done) {
     cleanupBackups({
-      rules: [{range: 0, keep: -1}, {range: 2, keep: 1}],
+      rules: [{age: 0, keep: -1}, {age: 2, keep: 1}],
       baseFolder: path.join(__dirname, 'backups')
     }, function(err, deletedFiles) {
       expect(err).toBe(null);

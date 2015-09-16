@@ -11,7 +11,7 @@ describe('mark-obsolete', function() {
       {age: 700}
     ];
     var rules = [{
-      range: 1000,
+      age: 1000,
       keep: 2
     }];
     markObsolete(files, rules);
@@ -27,7 +27,7 @@ describe('mark-obsolete', function() {
       {age: 700}
     ];
     var rules = [{
-      range: 1000,
+      age: 1000,
       keep: -1
     }];
     markObsolete(files, rules);
@@ -43,7 +43,7 @@ describe('mark-obsolete', function() {
       {age: 700}
     ];
     var rules = [{
-      range: 100,
+      age: 100,
       keep: 2
     }];
     markObsolete(files, rules);
@@ -61,10 +61,10 @@ describe('mark-obsolete', function() {
       {age: 1001}
     ];
     var rules = [{
-      range: 100,
+      age: 100,
       keep: 2
     }, {
-      range: 1000,
+      age: 1000,
       keep: 1
     }];
     markObsolete(files, rules);
@@ -84,15 +84,15 @@ describe('mark-obsolete', function() {
       {age: 700}
     ];
     var rules = [{
-      range: 100,
+      age: 100,
       keep: 2
     }, {
-      range: 40,
+      age: 40,
       keep: 0
     }];
 
     expect(function() {
       markObsolete(files, rules);
-    }).toThrow(new Error(cleanupBackups.CONST.ERR.RANGE_DID_NOT_INCREASE));
+    }).toThrow(new Error(cleanupBackups.CONST.ERR.AGE_DID_NOT_INCREASE));
   });
 });
