@@ -45,6 +45,15 @@ describe('cleanup-backups', function() {
     });
   });
 
+  it('should invoke optional callback with error', function(done) {
+    cleanupBackups({
+      baseFolder: path.join(__dirname, 'backups')
+    }, function(err) {
+      expect(err.message).toBe(cleanupBackups.CONST.ERR.MISSING_RULES);
+      done();
+    });
+  });
+
   it('should work', function(done) {
     spyOn(fakeFs, 'unlink').and.callThrough();
     cleanupBackups({
@@ -58,5 +67,21 @@ describe('cleanup-backups', function() {
       ));
       done();
     }).catch(done.fail);
+  });
+
+  it('should call optional callback with deleted files', function(done) {
+    cleanupBackups({
+      rules: [{range: 0, keep: -1}, {range: 2, keep: 1}],
+      baseFolder: path.join(__dirname, 'backups')
+    }, function(err, deletedFiles) {
+      expect(err).toBe(null);
+      expect(deletedFiles.length).toBe(1);
+      expect(deletedFiles[0]).toEqual({
+        file: path.join(__dirname, 'backups/b'),
+        age: 1,
+        obsolete: true
+      });
+      done();
+    });
   });
 });
